@@ -193,13 +193,13 @@ class LLMReverseHelper:
         '''
 
         
-1. Explain the purpose of this function in 2-3 sentences.
-2. Suggest a descriptive name for this function that clearly identifies its purpose.
-
-Format your response as:
-EXPLANATION: Your 2-3 sentence explanation
-NAME: suggested_function_name
-"""
+        1. Explain the purpose of this function in 2-3 sentences.
+        2. Suggest a descriptive name for this function that clearly identifies its purpose.
+        
+        Format your response as:
+        EXPLANATION: Your 2-3 sentence explanation
+        NAME: suggested_function_name
+        """
         
         response = self.query_llm(prompt)
         if not response:
@@ -244,19 +244,19 @@ NAME: suggested_function_name
             
         prompt = f"""Please analyze the variables in this decompiled function and suggest meaningful names:
 
-'''
-{source}
-'''
-
-
-For each variable, suggest a descriptive name that indicates its purpose.
-Format your response as:
-VARIABLE: original_variable_name
-SUGGESTED_NAME: new_descriptive_name
-REASON: Brief reason for the name choice
-
-Repeat for each variable.
-"""
+        '''
+        {source}
+        '''
+        
+        
+        For each variable, suggest a descriptive name that indicates its purpose.
+        Format your response as:
+        VARIABLE: original_variable_name
+        SUGGESTED_NAME: new_descriptive_name
+        REASON: Brief reason for the name choice
+        
+        Repeat for each variable.
+        """
         
         response = self.query_llm(prompt)
         if not response:
@@ -374,16 +374,16 @@ Repeat for each variable.
             
         prompt = f"""Analyze this decompiled function and identify if it implements any common algorithms (e.g., cryptographic algorithms, sorting algorithms,etc.):
 
-'''
-{source}
-'''
-
-
-If you identify a known algorithm, explain:
-1. What algorithm it is
-2. How confident you are in the identification
-3. Key characteristics that indicate this algorithm
-"""
+        '''
+        {source}
+        '''
+        
+        
+        If you identify a known algorithm, explain:
+        1. What algorithm it is
+        2. How confident you are in the identification
+        3. Key characteristics that indicate this algorithm
+        """
         
         result = self.query_llm(prompt)
         print("\n=== Algorithm Identification ===")
