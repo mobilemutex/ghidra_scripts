@@ -1,15 +1,9 @@
-#!/usr/bin/env python
-"""
-Ghidra Parser Function Detection Script
-
-This script automates the identification of message and file parsing functions
-within a loaded binary in Ghidra. It uses pattern-based analysis to detect
-functions that are likely involved in data parsing operations.
-
-Author: Manus AI
-Version: 1.0
-Compatible with: Ghidra 10.x+ (Jython 2.7)
-"""
+# Ghidra Parser Function Detection Script
+# @author mobilemutex
+# @category Analysis
+# @keybinding
+# @menupath
+# @toolbar
 
 # Ghidra imports
 from ghidra.program.model.symbol import SymbolType

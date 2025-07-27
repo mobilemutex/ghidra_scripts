@@ -1,8 +1,8 @@
 # LLMReverseHelper.py - A Ghidra script for LLM-assisted reverse engineering
-# @author LLM Reverse Engineer
+# @author mobilemutex
 # @category Analysis
-# @keybinding Alt-L
-# @menupath Tools.LLM.Analyze Current Function
+# @keybinding
+# @menupath
 # @toolbar
 
 from ghidra.program.model.listing import Function

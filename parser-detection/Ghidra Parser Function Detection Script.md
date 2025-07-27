@@ -2,9 +2,9 @@
 
 ## Overview
 
-This comprehensive Python script automates the identification of message and file parsing functions within loaded binaries in Ghidra. It is specifically designed for analyzing large C++ binaries where virtual calls and complex class structures make manual analysis challenging and time-consuming.
+This script automates the identification of message and file parsing functions within loaded binaries in Ghidra. It is specifically designed for analyzing large C++ binaries where virtual calls and complex class structures make manual analysis challenging and time-consuming.
 
-The script employs sophisticated pattern-based analysis techniques to detect functions that are likely involved in data parsing operations, including protocol handlers, file format parsers, message decoders, and data serialization/deserialization routines.
+The script employs pattern-based analysis techniques to detect functions that are likely involved in data parsing operations, including protocol handlers, file format parsers, message decoders, and data serialization/deserialization routines.
 
 ## Features
 
@@ -36,34 +36,6 @@ The script employs sophisticated pattern-based analysis techniques to detect fun
 
 **Multiple Report Formats**: Generates detailed console output, CSV reports for spreadsheet analysis, and HTML reports with interactive features for comprehensive documentation.
 
-## Installation and Setup
-
-### Prerequisites
-
-This script requires Ghidra 10.x or later with Python scripting support enabled. The script is designed to work with Ghidra's built-in Jython 2.7 interpreter and does not require additional Python packages beyond those included with Ghidra.
-
-### Installation Steps
-
-1. **Download the Script**: Save the `ghidra_parser_detector.py` file to your Ghidra scripts directory. The default location is typically:
-   - Windows: `%USERPROFILE%\ghidra_scripts`
-   - Linux/macOS: `~/ghidra_scripts`
-
-2. **Verify Script Location**: Open Ghidra and navigate to Window → Script Manager. The script should appear in the list of available scripts. If it doesn't appear, check that the file is in the correct directory and refresh the script manager.
-
-3. **Load Target Binary**: Open the binary you want to analyze in Ghidra. Ensure that the binary has been properly analyzed using Ghidra's auto-analysis features, as the script relies on function identification and symbol resolution.
-
-## Usage Instructions
-
-### Basic Usage
-
-To run the script with default settings:
-
-1. Open your target binary in Ghidra
-2. Navigate to Window → Script Manager
-3. Locate "ghidra_parser_detector.py" in the script list
-4. Double-click the script or select it and click "Run"
-5. Monitor the console output for progress updates
-6. Review results in the console and navigate to bookmarked functions
 
 ### Configuration Options
 
@@ -133,18 +105,6 @@ The script supports multiple output formats that can be customized:
 
 **HTML Reports**: Enhance the `generate_html_report()` method to add interactive features, styling changes, or additional visualizations.
 
-## Troubleshooting
-
-### Common Issues and Solutions
-
-**Script Not Appearing in Script Manager**: Ensure the script file is saved in the correct Ghidra scripts directory and that the file has the correct `.py` extension. Refresh the script manager if necessary.
-
-**Analysis Taking Too Long**: For very large binaries, consider using the quick scan mode or focused analysis on specific function name patterns. You can also increase the minimum score threshold to reduce the number of functions analyzed.
-
-**No Functions Detected**: This may indicate that the binary doesn't contain obvious parsing functions, or that the detection patterns need to be customized for the specific binary type. Try lowering the score threshold or adding custom keywords relevant to your analysis target.
-
-**Memory Issues**: For extremely large binaries, the script may consume significant memory. Consider analyzing smaller sections of the binary or increasing Ghidra's memory allocation.
-
 ### Performance Optimization
 
 **Selective Analysis**: Use the focused scan feature to analyze only functions matching specific patterns when you have prior knowledge about the binary structure.
@@ -166,16 +126,6 @@ The script is built around a modular architecture with several key components:
 **ReportGenerator Class**: Handles output formatting and report generation in multiple formats.
 
 **ParserDetectorConfig Class**: Centralizes configuration options and provides easy customization points.
-
-### Ghidra API Integration
-
-The script makes extensive use of Ghidra's Python API, including:
-
-- **Function Manager**: For iterating through and analyzing program functions
-- **Listing Interface**: For accessing instructions and program structure
-- **Symbol Table**: For resolving function names and references
-- **Memory Interface**: For accessing program memory and data
-- **Bookmark Manager**: For creating navigation bookmarks
 
 ### Analysis Algorithms
 
@@ -263,6 +213,3 @@ The script is designed to be extensible and welcomes community contributions:
 - **Performance Optimizations**: Improvements to analysis speed and memory usage
 - **Output Enhancements**: New report formats or visualization capabilities
 - **Bug Fixes**: Corrections to existing functionality and edge case handling
-
-This comprehensive parser detection script represents a significant advancement in automated reverse engineering capabilities, providing security researchers, malware analysts, and software engineers with powerful tools for understanding complex binary structures and data processing logic.
-
