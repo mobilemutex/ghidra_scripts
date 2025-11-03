@@ -1,4 +1,4 @@
-//Attempts to automatically discovers and analyze arrays of structs within binary executables. WORK IN PROGRESS
+//Attempts to automatically discovers and analyze arrays of structs within binary executables
 //@category Analysis.Structures
 //@author mobilemutex
 //@menupath
@@ -1619,15 +1619,31 @@ public class DiscoverArraysOfStructs extends GhidraScript {
         try {
             ReferenceManager refMgr = currentProgram.getReferenceManager();
             int referenceCount = 0;
+            int firstElementRefCount = 0;
+            boolean firstElementHasCodeRefs = false;
             
             // Check references to first few elements (limit for performance)
             int elementsToCheck = Math.min(arrayCount, 10);
             for (int i = 0; i < elementsToCheck; i++) {
                 Address elementAddr = startAddress.add(i * structSize);
                 ReferenceIterator refs = refMgr.getReferencesTo(elementAddr);
+                int elementRefCount = 0;
+                boolean elementHasCodeRefs = false;
+                
                 while (refs.hasNext()) {
+                    Reference ref = refs.next();
                     referenceCount++;
-                    refs.next();
+                    elementRefCount++;
+                    
+                    if (isCodeAddress(ref.getFromAddress())) {
+                        elementHasCodeRefs = true;
+                    }
+                }
+                
+                // Track first element references separately for bonus scoring
+                if (i == 0) {
+                    firstElementRefCount = elementRefCount;
+                    firstElementHasCodeRefs = elementHasCodeRefs;
                 }
             }
             
@@ -1656,6 +1672,27 @@ public class DiscoverArraysOfStructs extends GhidraScript {
                     score += 5;
                 }
             }
+            
+            // ENHANCED: Additional bonus if first element has cross-references
+            // This is a strong indicator that the array is actively used
+            if (firstElementRefCount > 0) {
+                // Give bonus points based on first element reference count
+                int firstElementBonus = Math.min(firstElementRefCount * 3, 8);
+                score += firstElementBonus;
+                
+                if (DEBUG_OUTPUT) {
+                    println("DEBUG:   First element has " + firstElementRefCount + " references, bonus: +" + firstElementBonus);
+                }
+                
+                // Extra bonus if first element has code references
+                if (firstElementHasCodeRefs) {
+                    score += 2;
+                    if (DEBUG_OUTPUT) {
+                        println("DEBUG:   First element has code references, extra bonus: +2");
+                    }
+                }
+            }
+            
         } catch (Exception e) {
             // Ignore errors in reference analysis
         }
